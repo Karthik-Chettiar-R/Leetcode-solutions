@@ -33,27 +33,8 @@ class Solution(object):
                     section+='0'
         sections.append(section)
         oneORzero.append(1)
-        size=0
 
-        
-        if len(sections)<5:
             
-            size=0
-            for i in range(len(sections)):
-                if oneORzero[i]:
-                    size+=len(sections[i])
-                    if i==0:
-                        size-=1
-                    if i==len(sections)-1:
-                        size-=1
-            return size
-
-        leftMost=0
-        left=1
-        middle=2
-        right=3
-        rightMost=4
-
         size=0
         for i in range(len(sections)):
             if oneORzero[i]:
@@ -62,8 +43,15 @@ class Solution(object):
                     size-=1
                 if i==len(sections)-1:
                     size-=1
-        l=0
-        r=4
+      
+
+        leftMost=0
+        left=1
+        middle=2
+        right=3
+        rightMost=4
+
+
         maxSize=size
         while(rightMost<len(sections)):
             currSize=len(sections[left])+len(sections[right])
@@ -82,16 +70,7 @@ class Solution(object):
         active=0
 
         return maxSize
-        for i in range(len(sections)):
-            if i in range(l,r+1):
-                active+=len(sections[i])
-            else :
-                if int(sections[i])>0:
-                    active+=len(sections[i])
 
-        
-
-        return sections
         
         
         

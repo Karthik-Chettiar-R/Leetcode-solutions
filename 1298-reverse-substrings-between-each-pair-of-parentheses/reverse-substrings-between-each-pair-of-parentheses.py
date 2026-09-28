@@ -4,76 +4,45 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
+        
+
+        portal={}
 
         stack=[]
-        subString=''
-
-        left=-1
-        right=len(s)
 
         for i in range(len(s)):
             if s[i]=='(':
-                left=i
-                break
+                stack.append(i)
+            elif s[i]==')':
+                if stack:
+                    portal2=stack.pop()
+                    portal[portal2]=i
+                    portal[i]=portal2
 
-        for j in range(len(s)-1,-1,-1):
-            if s[j]==')':
-                right=j
-                break
+        direction=1
 
-        if left==-1 or right==len(s):
-            return s
+        substring=''
 
-        parenthesis=0
+        i=0
 
-        for i in range(left,right+1):
+        l=0
+
+        while(i>-1 and i<len(s) and l<len(s)):
             if s[i]=='(':
-                stack.append(s[i])
-                parenthesis+=1
+                i=portal[i]
+                direction=-direction
+                i+=direction
 
             elif s[i]==')':
-                if parenthesis<1:
-                    if stack:
-                        stack[-1]+=s[i]
-                    else:
-                        stack.append(s[i])
-
-                    continue
-
-                sub=stack.pop()
-
-                if sub=='(':
-                    parenthesis-=1
-                    continue
-
-                sub=sub[::-1]
-
-                stack.pop()
-
-                if stack and stack[-1]!='(':
-                    stack[-1]+=sub
-                else:
-                    stack.append(sub)
-
-           
-
+                i=portal[i]
+                direction=-direction
+                i+=direction
+            
             else:
-                if not stack:
-                    stack.append(s[i])
-                else:
-                    if stack[-1]=='(':
-                        stack.append(s[i])
-                    else:
-                        stack[-1]+=s[i]
+                substring+=s[i]
+                i+=direction
+                l+=1
+
+        return substring
+
         
-        if stack:
-            return s[:left]+stack[-1]+s[right+1:]
-
-        return s[:left]+s[right+1:]
-
-
-
-       
-       
-
-

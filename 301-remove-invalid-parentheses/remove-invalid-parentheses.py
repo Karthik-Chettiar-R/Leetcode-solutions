@@ -44,10 +44,9 @@ class Solution(object):
             while(queue):
 
                 currentString=queue.popleft()
-                if currentString in visited:
-                    continue
                 
-                visited.add(currentString)
+                
+                
 
                 if len(currentString)<s_length-minHeight:
                     break
@@ -60,6 +59,9 @@ class Solution(object):
                     if currentString[i] not in parenthesis:
                         continue
                     candidate=currentString[:i]+currentString[i+1:]
+                    if candidate in visited:
+                        continue
+                    visited.add(candidate)
                     queue.append(candidate)
 
             return True

@@ -65,8 +65,7 @@ class Solution(object):
             return True
 
         bfs(s)
-        setOutput=set(output)
-        output=list(setOutput)
+        
         return output
 
 

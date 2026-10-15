@@ -4,22 +4,31 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        distinctCount=[0]
-        def subarray(nums,distinct,count,i,j):
-            if j>=len(nums):
-                return
-
-            if nums[j] not in distinct:
-                count+=1
-                distinct.add(nums[j])
-            distinctCount[0]+=count**2
-
-            subarray(nums,distinct.copy(),count,i,j+1)
 
         distinct=set()
+        distinctCount=0
+      
+
         for i in range(len(nums)):
-            subarray(nums,distinct.copy(),0,i,i)
+            count=0
+            distinct=set()
 
-        return distinctCount[0]
+            for j in range(i,len(nums)):
+                if nums[j] not in distinct:
+                    count+=1
+                    distinct.add(nums[j])
+
+                distinctCount+=count**2
+                
+
+        return distinctCount
+
+            
 
 
+
+                
+
+
+
+        

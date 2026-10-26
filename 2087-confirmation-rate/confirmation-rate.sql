@@ -1,0 +1,2 @@
+-- Write your PostgreSQL query statement below
+SELECT s.user_id, ROUND(COALESCE((SELECT count(t1.action) FROM confirmations t1 WHERE t1.user_id = s.user_id AND t1.action = 'confirmed') :: numeric/ NULLIF((SELECT count(t2.action) FROM confirmations t2 WHERE t2.user_id = s.user_id  ),0),0),2) AS confirmation_rate FROM signups s 
